@@ -1,22 +1,23 @@
-import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
+import { Routes, Route } from "react-router-dom";
 import LoginPage from "@pages/Login";
-import RegisterPage from "@pages/Register";
 import DashboardPage from "@pages/Dashboard";
 import NotFoundPage from "@pages/NotFound";
+import Layout from "@components/layout/Layout";
 
-const AppRoutes: React.FC = () => {
+export default function AppRoutes() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
-        <Route path="/dashboard" element={<DashboardPage />} />
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
-    </Router>
-  );
-};
+    <Routes>
+      {/* Public */}
+      <Route path="/" element={<LoginPage />} />
+      <Route path="/login" element={<LoginPage />} />
 
-export default AppRoutes;
+      {/* Protected — all wrapped in Layout */}
+      <Route element={<Layout />}>
+        <Route path="/dashboard" element={<DashboardPage />} />
+      </Route>
+
+      {/* 404 */}
+      <Route path="*" element={<NotFoundPage />} />
+    </Routes>
+  );
+}

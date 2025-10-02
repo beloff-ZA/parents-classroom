@@ -1,36 +1,34 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { Home, BookOpen, User, Settings } from "lucide-react";
 
-const menuItems = [
-  { name: "Dashboard", path: "/dashboard" },
-  { name: "Classes", path: "/classes" },
-  { name: "Profile", path: "/profile" },
-];
+export default function Sidebar() {
+  const location = useLocation();
 
-const Sidebar: React.FC = () => {
+  const menuItems = [
+    { name: "Dashboard", icon: <Home size={18} />, path: "/dashboard" },
+    { name: "Profile", icon: <User size={18} />, path: "/profile" },
+    { name: "Classes", icon: <BookOpen size={18} />, path: "/classes" },
+    { name: "Settings", icon: <Settings size={18} />, path: "/settings" },
+  ];
+
   return (
-    <div className="w-64 bg-gray-800 text-white h-screen flex flex-col">
-      <div className="text-2xl font-bold p-6 border-b border-gray-700">
-        Parent Portal
-      </div>
+    <aside className="w-64 bg-white shadow-md flex flex-col h-screen">
+      <div className="p-6 text-xl font-bold border-b">Parents Classroom</div>
 
-      <nav className="flex flex-col flex-1 p-4 space-y-2">
+      <nav className="flex-1 flex flex-col p-4 space-y-2 overflow-auto">
         {menuItems.map((item) => (
-          <NavLink
+          <Link
             key={item.name}
             to={item.path}
-            className={({ isActive }) =>
-              `px-4 py-2 rounded-lg hover:bg-gray-700 ${
-                isActive ? "bg-gray-700" : ""
-              }`
-            }
+            className={`flex items-center px-4 py-2 rounded hover:bg-gray-100 transition-colors ${
+              location.pathname === item.path ? "bg-gray-100 font-semibold" : ""
+            }`}
           >
+            <span className="mr-3">{item.icon}</span>
             {item.name}
-          </NavLink>
+          </Link>
         ))}
       </nav>
-    </div>
+    </aside>
   );
-};
-
-export default Sidebar;
+}

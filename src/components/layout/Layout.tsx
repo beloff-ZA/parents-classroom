@@ -1,17 +1,23 @@
-import React from "react";
+import { Outlet } from "react-router-dom";
 import Sidebar from "@components/Sidebar/Sidebar";
+import Nav from "@components/layout/Nav";
 
-interface LayoutProps {
-  children: React.ReactNode;
-}
-
-const Layout: React.FC<LayoutProps> = ({ children }) => {
+export default function Layout() {
   return (
-    <div className="flex h-screen">
+    <div className="flex h-screen bg-gray-50">
+      {/* Sidebar */}
       <Sidebar />
-      <main className="flex-1 p-8 overflow-auto bg-gray-100">{children}</main>
+
+      {/* Main Content */}
+      <div className="flex flex-col flex-1 overflow-hidden">
+        {/* Top Navigation */}
+        <Nav />
+
+        {/* Page Content */}
+        <main className="flex-1 p-6 overflow-auto">
+          <Outlet />
+        </main>
+      </div>
     </div>
   );
-};
-
-export default Layout;
+}
