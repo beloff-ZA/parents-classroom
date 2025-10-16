@@ -1,5 +1,6 @@
 import React from "react";
-import Sidebar from "@/components/Sidebar/Sidebar";
+import TopBar from "@/components/TopBar/TopBar";
+import SideBar from "@/components/Sidebar/Sidebar";
 
 export default function ProfileLayout({
   children,
@@ -7,13 +8,11 @@ export default function ProfileLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="min-h-screen flex bg-gray-50">
-      <Sidebar />
+    <div className="profile-layout flex min-h-screen">
+      <SideBar />
       <div className="flex-1 flex flex-col">
-        <header className="h-16 flex items-center justify-center border-b bg-white">
-          <div className="text-sm font-medium">Profile</div>
-        </header>
-        <main className="p-6">{children}</main>
+        <TopBar layout="profile" />
+        <main className="p-8 flex-1 bg-gray-50">{children}</main>
       </div>
     </div>
   );

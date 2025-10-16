@@ -20,7 +20,7 @@ const AppRoutes = () => {
   return (
     <Router>
       <Routes>
-        {/* Default Home page */}
+        {/* Home page - shown if not authenticated */}
         <Route
           path="/"
           element={
@@ -28,7 +28,7 @@ const AppRoutes = () => {
           }
         />
 
-        {/* Auth routes */}
+        {/* Login */}
         <Route
           path="/login"
           element={
@@ -41,6 +41,8 @@ const AppRoutes = () => {
             )
           }
         />
+
+        {/* Register */}
         <Route
           path="/register"
           element={
@@ -54,7 +56,7 @@ const AppRoutes = () => {
           }
         />
 
-        {/* Other routes from routes.tsx */}
+        {/* Dashboard/Profile routes */}
         {routes.map(({ path, element, layout }) => {
           let Layout;
           switch (layout) {
@@ -68,6 +70,7 @@ const AppRoutes = () => {
               Layout = AuthLayout;
           }
 
+          // Redirect unauthenticated users to home
           if (
             !isAuthenticated &&
             (layout === "dashboard" || layout === "profile")
@@ -90,7 +93,7 @@ const AppRoutes = () => {
           );
         })}
 
-        {/* Catch-all: redirect to home */}
+        {/* Catch-all */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Router>
