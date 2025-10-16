@@ -1,7 +1,7 @@
 // src/main.tsx
 import React from "react";
 import ReactDOM from "react-dom/client";
-import AppRoutes from "@/routes/AppRoutes";
+import AppRoutes from "@/Routes/AppRoutes";
 import "@/styles/globals.css";
 import "@/styles/themes/default.css";
 
