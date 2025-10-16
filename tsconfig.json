@@ -21,8 +21,7 @@
       "@routes/*": ["src/routes/*"],
       "@pages/*": ["src/pages/*"],
       "@components/*": ["src/components/*"],
-      "@store/*": ["src/store/*"],
-      "include": ["src", "src/routes/AppRoutes.tsx"]
+      "@store/*": ["src/store/*"]
     },
     "types": ["node"]
   },
