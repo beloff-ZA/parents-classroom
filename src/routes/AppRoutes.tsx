@@ -10,67 +10,26 @@ import AuthLayout from "@/components/layout/AuthLayout/AuthLayout";
 import DashboardLayout from "@/components/layout/DashboardLayout/DashboardLayout";
 import ProfileLayout from "@/components/layout/ProfileLayout/ProfileLayout";
 import { useStore } from "@/store/useStore";
-import Home from "@/pages/Home/index";
-import Login from "@/pages/Login/index";
-import Register from "@/pages/Register/index";
 
 const AppRoutes = () => {
   const { isAuthenticated } = useStore();
 
+  const getLayout = (layout: string, element: React.ReactNode) => {
+    switch (layout) {
+      case "dashboard":
+        return <DashboardLayout>{element}</DashboardLayout>;
+      case "profile":
+        return <ProfileLayout>{element}</ProfileLayout>;
+      default:
+        return <AuthLayout>{element}</AuthLayout>;
+    }
+  };
+
   return (
     <Router>
       <Routes>
-        {/* Home page - shown if not authenticated */}
-        <Route
-          path="/"
-          element={
-            !isAuthenticated ? <Home /> : <Navigate to="/dashboard" replace />
-          }
-        />
-
-        {/* Login */}
-        <Route
-          path="/login"
-          element={
-            !isAuthenticated ? (
-              <AuthLayout>
-                <Login />
-              </AuthLayout>
-            ) : (
-              <Navigate to="/dashboard" replace />
-            )
-          }
-        />
-
-        {/* Register */}
-        <Route
-          path="/register"
-          element={
-            !isAuthenticated ? (
-              <AuthLayout>
-                <Register />
-              </AuthLayout>
-            ) : (
-              <Navigate to="/dashboard" replace />
-            )
-          }
-        />
-
-        {/* Dashboard/Profile routes */}
         {routes.map(({ path, element, layout }) => {
-          let Layout;
-          switch (layout) {
-            case "dashboard":
-              Layout = DashboardLayout;
-              break;
-            case "profile":
-              Layout = ProfileLayout;
-              break;
-            default:
-              Layout = AuthLayout;
-          }
-
-          // Redirect unauthenticated users to home
+          // Redirect if user not authenticated for protected pages
           if (
             !isAuthenticated &&
             (layout === "dashboard" || layout === "profile")
@@ -84,11 +43,26 @@ const AppRoutes = () => {
             );
           }
 
+          // Redirect authenticated user away from auth pages
+          if (
+            isAuthenticated &&
+            layout === "auth" &&
+            (path === "/" || path === "/login" || path === "/register")
+          ) {
+            return (
+              <Route
+                key={path}
+                path={path}
+                element={<Navigate to="/dashboard" replace />}
+              />
+            );
+          }
+
           return (
             <Route
               key={path}
               path={path}
-              element={<Layout>{element}</Layout>}
+              element={getLayout(layout, element)}
             />
           );
         })}
