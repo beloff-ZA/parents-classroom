@@ -1,0 +1,113 @@
+/* src/styles/global.css */
+
+/* Reset and base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  width: 100%;
+  font-family: "Inter", sans-serif;
+  background-color: #f9fafb;
+}
+
+/* TopBar styling */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+  width: 100%;
+  padding: 0 24px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.topbar .project-name {
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+
+/* Home page content container */
+.home-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  flex: 1;
+  padding: 48px 24px;
+  text-align: center;
+}
+
+.home-container h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 24px;
+}
+
+.home-container p {
+  font-size: 1.125rem;
+  color: #4b5563;
+  max-width: 700px;
+  line-height: 1.6;
+}
+
+/* Buttons and links for later */
+.button {
+  background-color: #3b82f6;
+  color: #ffffff;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.button:hover {
+  background-color: #2563eb;
+}
+
+.menu-left {
+  display: flex;
+  align-items: center;
+  gap: 16px; /* spacing between links or icon */
+}
+
+.menu-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-button svg {
+  width: 24px;
+  height: 24px;
+  color: #1f2937; /* dark gray */
+}
+.menu-link {
+  text-decoration: none;
+  font-weight: 500;
+  color: #1f2937; /* dark gray */
+}
+
+.menu-link:hover {
+  color: #3b82f6; /* primary hover color */
+}
+
+.menu-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

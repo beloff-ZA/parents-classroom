@@ -1,3 +1,4 @@
+import React from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -9,7 +10,9 @@ import AuthLayout from "@/components/layout/AuthLayout/AuthLayout";
 import DashboardLayout from "@/components/layout/DashboardLayout/DashboardLayout";
 import ProfileLayout from "@/components/layout/ProfileLayout/ProfileLayout";
 import { useStore } from "@/store/useStore";
+import Home from "@/pages/Home/index";
 import Login from "@/pages/Login/index";
+import Register from "@/pages/Register/index";
 
 const AppRoutes = () => {
   const { isAuthenticated } = useStore();
@@ -17,19 +20,41 @@ const AppRoutes = () => {
   return (
     <Router>
       <Routes>
-        {/* Default route for unauthenticated users */}
-        {!isAuthenticated && (
-          <Route
-            path="/"
-            element={
+        {/* Default Home page */}
+        <Route
+          path="/"
+          element={
+            !isAuthenticated ? <Home /> : <Navigate to="/dashboard" replace />
+          }
+        />
+
+        {/* Auth routes */}
+        <Route
+          path="/login"
+          element={
+            !isAuthenticated ? (
               <AuthLayout>
                 <Login />
               </AuthLayout>
-            }
-          />
-        )}
+            ) : (
+              <Navigate to="/dashboard" replace />
+            )
+          }
+        />
+        <Route
+          path="/register"
+          element={
+            !isAuthenticated ? (
+              <AuthLayout>
+                <Register />
+              </AuthLayout>
+            ) : (
+              <Navigate to="/dashboard" replace />
+            )
+          }
+        />
 
-        {/* Map all defined routes */}
+        {/* Other routes from routes.tsx */}
         {routes.map(({ path, element, layout }) => {
           let Layout;
           switch (layout) {
@@ -43,7 +68,6 @@ const AppRoutes = () => {
               Layout = AuthLayout;
           }
 
-          // Redirect to login if user is not authenticated and route requires auth
           if (
             !isAuthenticated &&
             (layout === "dashboard" || layout === "profile")
@@ -66,7 +90,7 @@ const AppRoutes = () => {
           );
         })}
 
-        {/* Catch-all: redirect to home if no match */}
+        {/* Catch-all: redirect to home */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Router>

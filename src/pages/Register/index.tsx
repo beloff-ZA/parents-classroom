@@ -9,66 +9,60 @@ const RegisterPage: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    // Here you can integrate API call or Zustand store logic
     alert("Registration submitted. Admin will verify access.");
-    navigate("/");
+    navigate("/login");
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-green-400 to-teal-500">
-      <div className="bg-white rounded-xl shadow-lg p-8 max-w-md w-full">
-        <h1 className="text-3xl font-bold mb-6 text-center text-gray-800">
-          Register
-        </h1>
-
-        <form onSubmit={handleSubmit} className="space-y-5">
-          <div>
-            <label className="block mb-1 font-medium text-gray-700">Name</label>
+    <div className="auth-bg">
+      <div className="auth-container">
+        <h1 className="auth-title">Parents Classroom</h1>
+        <form onSubmit={handleSubmit} className="auth-form">
+          <div className="form-group">
+            <label className="form-label">Name</label>
             <input
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
+              className="auth-input"
+              placeholder="Enter your full name"
               required
             />
           </div>
 
-          <div>
-            <label className="block mb-1 font-medium text-gray-700">
-              Email
-            </label>
+          <div className="form-group">
+            <label className="form-label">Email</label>
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
+              className="auth-input"
+              placeholder="Enter your email"
               required
             />
           </div>
 
-          <div>
-            <label className="block mb-1 font-medium text-gray-700">
-              Password
-            </label>
+          <div className="form-group">
+            <label className="form-label">Password</label>
             <input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
+              className="auth-input"
+              placeholder="Enter your password"
               required
             />
           </div>
 
-          <button className="w-full bg-green-600 text-white py-2 rounded-lg font-semibold hover:bg-green-700 transition">
+          <button type="submit" className="auth-button">
             Register
           </button>
         </form>
 
-        <p className="mt-6 text-center text-sm text-gray-500">
+        <p className="text-center mt-4">
           Already registered?{" "}
-          <span
-            className="text-green-600 cursor-pointer hover:underline"
-            onClick={() => navigate("/")}
-          >
+          <span className="auth-link" onClick={() => navigate("/login")}>
             Login here
           </span>
         </p>

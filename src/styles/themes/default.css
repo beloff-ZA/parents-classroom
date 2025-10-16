@@ -1,0 +1,75 @@
+/* src/styles/themes/default.css */
+:root {
+  --color-primary: #3b82f6;
+  --color-primary-hover: #2563eb;
+  --color-background: #f9fafb;
+  --color-text: #4b5563;
+  --font-base: "Inter", sans-serif;
+}
+/* Background gradients */
+.auth-bg {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(90deg, #22c55e, #14b8a6); /* green to teal */
+}
+
+/* Form container */
+.auth-container {
+  background-color: white;
+  border-radius: 1rem;
+  padding: 2rem;
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Form header */
+.auth-container h1 {
+  font-size: 1.875rem; /* text-3xl */
+  font-weight: 700;
+  color: #1f2937;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+/* Inputs */
+.auth-input {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  margin-top: 0.25rem;
+  margin-bottom: 1rem;
+  outline: none;
+  transition: box-shadow 0.2s;
+}
+
+.auth-input:focus {
+  box-shadow: 0 0 0 2px #22c55e; /* green focus ring */
+  border-color: #22c55e;
+}
+
+/* Buttons */
+.auth-button {
+  width: 100%;
+  background-color: #22c55e;
+  color: white;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.auth-button:hover {
+  background-color: #16a34a; /* darker green */
+}
+
+/* Links */
+.auth-link {
+  color: #22c55e;
+  cursor: pointer;
+  text-decoration: underline;
+}

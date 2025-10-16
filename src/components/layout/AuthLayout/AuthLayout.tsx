@@ -1,19 +1,16 @@
 import React from "react";
 import TopBar from "@/components/TopBar/TopBar";
 
-export default function AuthLayout({
-  children,
-}: {
+interface AuthLayoutProps {
   children: React.ReactNode;
-}) {
+}
+
+export default function AuthLayout({ children }: AuthLayoutProps) {
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col">
-      <TopBar />
-      <main className="flex-1 flex items-center justify-center p-6">
-        <div className="w-full max-w-md bg-white rounded-lg shadow p-6">
-          {children}
-        </div>
-      </main>
+    <div className="min-h-screen flex flex-col">
+      {/* TopBar for Auth pages */}
+      <TopBar layout="auth" />
+      <main className="flex-1">{children}</main>
     </div>
   );
 }
